@@ -1,10 +1,21 @@
-# install dependencies, if needed
-sudo apt update && sudo apt upgrade -y
-sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc unzip -y
+# Initia
 
+Website: initia.xyz
 
+Twitter: https://x.com/initiaFDN
 
-# install go, if needed
+Discord: https://discord.com/invite/initia
+
+**System Requirements (Recommended)**
+
+CPU: 4 core
+
+RAM: 16 GB
+
+Storage(SSD): 1TB SSD or Nvme
+
+**install go, if needed**
+```
 cd $HOME
 VER="1.22.2"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
@@ -15,7 +26,7 @@ rm "go$VER.linux-amd64.tar.gz"
 echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
 source $HOME/.bash_profile
 [ ! -d ~/go/bin ] && mkdir -p ~/go/bin
-
+```
 # set vars
 echo "export WALLET="wallet"" >> $HOME/.bash_profile
 echo "export MONIKER="test"" >> $HOME/.bash_profile
