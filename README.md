@@ -27,26 +27,32 @@ echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
 source $HOME/.bash_profile
 [ ! -d ~/go/bin ] && mkdir -p ~/go/bin
 ```
-# set vars
+
+**set vars**
+```
 echo "export WALLET="wallet"" >> $HOME/.bash_profile
 echo "export MONIKER="test"" >> $HOME/.bash_profile
 echo "export INITIA_CHAIN_ID="initiation-1"" >> $HOME/.bash_profile
 echo "export INITIA_PORT="51"" >> $HOME/.bash_profile
 source $HOME/.bash_profile
+```
 
-# download binary
+**download binary**
+```
 cd $HOME
 rm -rf initia
 git clone https://github.com/initia-labs/initia.git
 cd initia
 git checkout v0.2.23-stage-2
 make install
-
-# config and init app
+```
+**config and init app**
+```
 initiad init $MONIKER
 initiad config set client chain-id initiation-1
 initiad config set client node tcp://localhost:${INITIA_PORT}657
 sed -i -e "s|^node *=.*|node = \"tcp://localhost:${INITIA_PORT}657\"|" $HOME/.initia/config/client.toml
+```
 
 # download genesis and addrbook
 wget -O $HOME/.initia/config/genesis.json https://testnet-files.itrocket.net/initia/genesis.json
