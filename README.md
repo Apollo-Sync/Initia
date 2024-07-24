@@ -54,16 +54,20 @@ initiad config set client node tcp://localhost:${INITIA_PORT}657
 sed -i -e "s|^node *=.*|node = \"tcp://localhost:${INITIA_PORT}657\"|" $HOME/.initia/config/client.toml
 ```
 
-# download genesis and addrbook
+**download genesis and addrbook**
+```
 wget -O $HOME/.initia/config/genesis.json https://testnet-files.itrocket.net/initia/genesis.json
 wget -O $HOME/.initia/config/addrbook.json https://testnet-files.itrocket.net/initia/addrbook.json
+```
 
-# set seeds and peers
+**set seeds and peers**
+```
 SEEDS="cd69bcb00a6ecc1ba2b4a3465de4d4dd3e0a3db1@initia-testnet-seed.itrocket.net:51656"
 PEERS="67b58592de11a6885d71d3ea436dc284b816caa3@initia-testnet-peer.itrocket.net:51656,064869eb4f8bc561ba37d498e71478015ae98390@156.67.80.197:26656,b54d2c93d29451f3066e264060374f6931253506@65.109.92.18:16656,9166f6ee9a0f452cf5b6602a896e36bbd51d27b5@65.109.88.162:17956,25c298e8b74756c6f9e9f01fe8be14f14a307922@65.108.121.227:13756,a8123d44f558c511d76fe87c7e610d9a55238d1f@65.108.232.156:25756,c56ab2c4a718d781491218b02ca79bab5fe2f4d6@65.108.69.56:17956,0f5e3f72b1dc6d657d65f4f6b74f0f32b69758fd@213.239.218.219:50156,35159c57705825cee2096fe688d00af713ff4f07@185.190.140.7:26656,635d183fd9788846c2606b6ebf9fef3ea83cd06c@37.27.130.137:17956,62775997caa3d814c5ad91492cb9d411aea91c58@51.38.53.103:26856"
 sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.initia/config/config.toml
-
-# set custom ports in app.toml
+```
+**set custom ports in app.toml**
+```
 sed -i.bak -e "s%:1317%:${INITIA_PORT}317%g;
 s%:8080%:${INITIA_PORT}080%g;
 s%:9090%:${INITIA_PORT}090%g;
@@ -71,7 +75,7 @@ s%:9091%:${INITIA_PORT}091%g;
 s%:8545%:${INITIA_PORT}545%g;
 s%:8546%:${INITIA_PORT}546%g;
 s%:6065%:${INITIA_PORT}065%g" $HOME/.initia/config/app.toml
-
+```
 # set custom ports in config.toml file
 sed -i.bak -e "s%:26658%:${INITIA_PORT}658%g;
 s%:26657%:${INITIA_PORT}657%g;
