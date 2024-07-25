@@ -76,25 +76,33 @@ s%:8545%:${INITIA_PORT}545%g;
 s%:8546%:${INITIA_PORT}546%g;
 s%:6065%:${INITIA_PORT}065%g" $HOME/.initia/config/app.toml
 ```
-# set custom ports in config.toml file
+
+**set custom ports in config.toml file**
+```
 sed -i.bak -e "s%:26658%:${INITIA_PORT}658%g;
 s%:26657%:${INITIA_PORT}657%g;
 s%:6060%:${INITIA_PORT}060%g;
 s%:26656%:${INITIA_PORT}656%g;
 s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${INITIA_PORT}656\"%;
 s%:26660%:${INITIA_PORT}660%g" $HOME/.initia/config/config.toml
+```
 
-# config pruning
+**config pruning**
+```
 sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $HOME/.initia/config/app.toml
 sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.initia/config/app.toml
 sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"50\"/" $HOME/.initia/config/app.toml
+```
 
-# set minimum gas price, enable prometheus and disable indexing
+**set minimum gas price, enable prometheus and disable indexing**
+```
 sed -i 's|minimum-gas-prices =.*|minimum-gas-prices = "0.15uinit,0.01uusdc"|g' $HOME/.initia/config/app.toml
 sed -i -e "s/prometheus = false/prometheus = true/" $HOME/.initia/config/config.toml
 sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.initia/config/config.toml
+```
 
-# create service file
+**create service file**
+```
 sudo tee /etc/systemd/system/initiad.service > /dev/null <<EOF
 [Unit]
 Description=Initia node
@@ -109,16 +117,21 @@ LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
 EOF
+```
 
-# reset and download snapshot
+**reset and download snapshot**
+```
 initiad tendermint unsafe-reset-all --home $HOME/.initia
 if curl -s --head curl https://testnet-files.itrocket.net/initia/snap_initia.tar.lz4 | head -n 1 | grep "200" > /dev/null; then
   curl https://testnet-files.itrocket.net/initia/snap_initia.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.initia
     else
   echo no have snap
 fi
+```
 
-# enable and start service
+**enable and start service**
+```
 sudo systemctl daemon-reload
 sudo systemctl enable initiad
 sudo systemctl restart initiad && sudo journalctl -u initiad -f
+```
