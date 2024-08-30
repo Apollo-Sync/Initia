@@ -56,8 +56,8 @@ sed -i -e "s|^node *=.*|node = \"tcp://localhost:${INITIA_PORT}657\"|" $HOME/.in
 
 **download genesis and addrbook**
 ```
-wget -O $HOME/.initia/config/genesis.json https://testnet-files.itrocket.net/initia/genesis.json
-wget -O $HOME/.initia/config/addrbook.json https://testnet-files.itrocket.net/initia/addrbook.json
+wget -O $HOME/.initia/config/genesis.json https://raw.githubusercontent.com/Apollo-Sync/Initia/main/genesis.json
+wget -O $HOME/.initia/config/addrbook.json https://raw.githubusercontent.com/Apollo-Sync/Initia/main/addrbook.json
 ```
 
 **set seeds and peers**
