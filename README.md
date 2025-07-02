@@ -7,12 +7,15 @@ Twitter: https://x.com/initiaFDN
 Discord: https://discord.com/invite/initia
 
 **System Requirements (Recommended)**
+```
 
 CPU: 4 core
 
 RAM: 16 GB
 
 Storage(SSD): 1TB SSD or Nvme
+```
+
 
 **install go, if needed**
 ```
